@@ -257,6 +257,13 @@ UPSCALE_Y = 2.0
 TEMPLATE_PATH = "Blank_CD_Table.xlsx"   # local template file
 # -------------
 
+@st.cache_resource
+def load_reader():
+    return easyocr.Reader(["en"])
+
+# Load once and reuse
+reader = load_reader()
+
 def extract_measurement(results):
     """
     Extract 'xxx.x nm' from EasyOCR results, with fix for
